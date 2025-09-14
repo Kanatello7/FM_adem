@@ -1,0 +1,19 @@
+[project]
+name = "fm-adem"
+version = "0.1.0"
+description = "\"adem reports\""
+authors = [
+    {name = "Kanat",email = "Kanat@gm.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard] (>=0.116.1,<0.117.0)",
+    "sqlalchemy (>=2.0.43,<3.0.0)",
+    "aiosqlite (>=0.21.0,<0.22.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
