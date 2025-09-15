@@ -13,5 +13,5 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry install --no-ansi --no-root
 COPY . .
 
-CMD ["celery", "-A", "celery_config", "worker", "--loglevel=info"]
+
 CMD ["python", "src/adem/main.py"]
