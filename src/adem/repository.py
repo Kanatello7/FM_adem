@@ -3,7 +3,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 import json
 import os
 from typing import Optional
-#from models import CounterParty
 
 class AdemRepository():
     def __init__(self, session: AsyncSession):
@@ -20,7 +19,7 @@ class AdemRepository():
             res = await self.session.execute(text(query), params) 
         else:
             res = await self.session.execute(text(query))
-        return res.fetchall()
+        return res.mappings().all()
     
     async def get_report_19_33_1(self):
         allowed_dcodes = self.config["report_19_33_1"]['dcodes']
@@ -78,7 +77,7 @@ class AdemRepository():
         query = """
             SELECT
                 documentno,
-                status_zav 
+                docstatus 
             FROM adempiere.report_19_20_v
             """
             
@@ -103,21 +102,4 @@ class AdemRepository():
         """
         return await self.execute_query(query)
     
-    #async def update_CounterParty(self, result):
-    #    async with self.session.begin():
-    #        await self.session.execute(update(CounterParty).values(in_blacklist=False))
-    #        for row in result:
-    #            stmt = select(CounterParty).where(CounterParty.bin_or_iin == row["bin_or_iin"])
-    #            result_obj = await self.session.execute(stmt)
-    #            counterparty = result_obj.scalar_one_or_none()
-#
-    #            if counterparty:
-    #                counterparty.in_blacklist = True 
-    #            else:
-    #                new_counterparty = CounterParty(
-    #                    name=row["name"],
-    #                    bin_or_iin=row["bin_or_iin"],
-    #                    in_blacklist=True,
-    #                )
-    #                self.session.add(new_counterparty)
         

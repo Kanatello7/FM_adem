@@ -81,7 +81,7 @@ class AdemService():
             result.append(
                 {
                     "number": row.get("documentno"),
-                    "status": row.get("status_zav"),
+                    "status": row.get("docstatus"),
                 }
             )
         return result

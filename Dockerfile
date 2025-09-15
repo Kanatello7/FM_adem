@@ -1,9 +1,17 @@
 FROM python:3.11-slim
 
-WORKDIR /app 
+RUN apt-get update && apt-get install -y curl build-essential \
+    && curl -sSL https://install.python-poetry.org | python3 - \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml .
-RUN poetry install 
+ENV PATH="/root/.local/bin:$PATH"
+ENV POETRY_VIRTUALENVS_CREATE=false
+ENV POETRY_NO_INTERACTION=1
+
+WORKDIR /app
+COPY pyproject.toml poetry.lock* ./
+RUN poetry install --no-ansi --no-root
 COPY . .
 
-CMD [ "poetry", "run", "python", "src/adem/main.py"]
+CMD ["celery", "-A", "celery_config", "worker", "--loglevel=info"]
+CMD ["python", "src/adem/main.py"]
