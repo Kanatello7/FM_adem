@@ -67,12 +67,6 @@ class AdemService():
                 }
             )
         return result
-        #output = f"Записи чёрного списка посажены успешно: {len(result)}"
-        #try:
-        #    await self.repo.update_CounterParty(result)
-        #except Exception as e:
-        #    output = f"Ошибка, записи не были посажены: {e}"
-        #return output
         
     async def import_19_20(self):
         rows = await self.repo.get_report_19_20()
@@ -110,3 +104,5 @@ class AdemService():
                 }
             )
         return result
+    
+
