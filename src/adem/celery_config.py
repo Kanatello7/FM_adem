@@ -17,6 +17,7 @@ app.conf.update(
     result_serializer='json',
     timezone='UTC',
     enable_utc=True,
+    result_expires=3600,
 )
 
 def get_task_processor(report_type: str):
@@ -45,7 +46,7 @@ def import_19_33_1():
 def import_3_22():
     async def run():
         async for service in get_adem_service_for_celery():
-            result = await service.import_19_33_1()  
+            result = await service.import_3_22()  
             return result
     return asyncio.run(run())
 
@@ -53,7 +54,7 @@ def import_3_22():
 def import_19_20():
     async def run():
         async for service in get_adem_service_for_celery():
-            result = await service.import_19_33_1()  
+            result = await service.import_19_20()  
             return result
     return asyncio.run(run())
 
@@ -61,7 +62,7 @@ def import_19_20():
 def import_7_40():
     async def run():
         async for service in get_adem_service_for_celery():
-            result = await service.import_19_33_1()  
+            result = await service.import_7_40()  
             return result
     return asyncio.run(run())
 
@@ -69,6 +70,6 @@ def import_7_40():
 def import_bpartner_v():
     async def run():
         async for service in get_adem_service_for_celery():
-            result = await service.import_19_33_1()  
+            result = await service.import_bpartner_v()  
             return result
     return asyncio.run(run())
